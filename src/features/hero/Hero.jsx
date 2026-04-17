@@ -13,8 +13,8 @@ export function Hero({ onViewProjects, onDownloadCV }) {
     if (onDownloadCV) {
       onDownloadCV()
     } else {
-      // Placeholder - en el futuro apuntará al CV real
-      alert('CV download coming soon!')
+      // Open CV in new tab
+      window.open('https://rxresu.me/sa4rg/cv-sara-arguello', '_blank', 'noopener,noreferrer')
     }
   }
 
@@ -70,7 +70,7 @@ export function Hero({ onViewProjects, onDownloadCV }) {
               size="lg"
               onClick={handleDownloadCV}
             >
-              Download CV
+              View CV
             </Button>
             
             {/* Certifications Button - Disabled until certificate arrives */}
