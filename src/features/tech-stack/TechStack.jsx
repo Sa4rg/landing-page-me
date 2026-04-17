@@ -48,25 +48,37 @@ export function TechStack() {
         'Cloudinary',
         'AWS Lambda'
       ]
+    },
+    {
+      title: 'AI Workflow',
+      color: 'indigo',
+      technologies: [
+        'GitHub Copilot',
+        'Claude AI',
+        'ChatGPT',
+        'AI-Assisted Development'
+      ]
     }
   ]
 
   const getColorClasses = (color) => {
     const colors = {
-      blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
-      green: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
-      purple: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
-      orange: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800'
+      blue: 'bg-blue-500/10 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700',
+      green: 'bg-green-500/10 dark:bg-green-900/30 border-green-300 dark:border-green-700',
+      purple: 'bg-purple-500/10 dark:bg-purple-900/30 border-purple-300 dark:border-purple-700',
+      orange: 'bg-orange-500/10 dark:bg-orange-900/30 border-orange-300 dark:border-orange-700',
+      indigo: 'bg-indigo-500/10 dark:bg-indigo-900/30 border-indigo-300 dark:border-indigo-700'
     }
     return colors[color] || colors.blue
   }
 
   const getTitleColorClasses = (color) => {
     const colors = {
-      blue: 'text-blue-700 dark:text-blue-400',
-      green: 'text-green-700 dark:text-green-400',
-      purple: 'text-purple-700 dark:text-purple-400',
-      orange: 'text-orange-700 dark:text-orange-400'
+      blue: 'text-blue-600 dark:text-blue-400',
+      green: 'text-green-600 dark:text-green-400',
+      purple: 'text-purple-600 dark:text-purple-400',
+      orange: 'text-orange-600 dark:text-orange-400',
+      indigo: 'text-indigo-600 dark:text-indigo-400'
     }
     return colors[color] || colors.blue
   }
@@ -86,7 +98,7 @@ export function TechStack() {
           </div>
 
           {/* Tech Categories Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {techCategories.map((category) => (
               <Card 
                 key={category.title}
@@ -110,7 +122,8 @@ export function TechStack() {
                         category.color === 'blue' ? 'bg-blue-500' :
                         category.color === 'green' ? 'bg-green-500' :
                         category.color === 'purple' ? 'bg-purple-500' :
-                        'bg-orange-500'
+                        category.color === 'orange' ? 'bg-orange-500' :
+                        'bg-indigo-500'
                       }`} />
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {tech}
@@ -123,9 +136,12 @@ export function TechStack() {
           </div>
 
           {/* Additional Info */}
-          <div className="mt-12 text-center">
+          <div className="mt-12 text-center space-y-3">
             <p className="text-gray-600 dark:text-gray-400">
               Always learning and exploring new technologies to improve development workflow
+            </p>
+            <p className="text-sm text-indigo-600 dark:text-indigo-400 font-medium">
+              🤖 Building with AI assistance while maintaining clean architecture and best practices
             </p>
           </div>
         </div>

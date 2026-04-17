@@ -35,6 +35,11 @@ describe('TechStack', () => {
       render(<TechStack />)
       expect(screen.getByRole('heading', { name: /^tools$/i })).toBeInTheDocument()
     })
+
+    it('should render AI Workflow category', () => {
+      render(<TechStack />)
+      expect(screen.getByRole('heading', { name: /ai workflow/i })).toBeInTheDocument()
+    })
   })
 
   describe('Frontend Technologies', () => {
@@ -102,6 +107,23 @@ describe('TechStack', () => {
     it('should display Sentry', () => {
       render(<TechStack />)
       expect(screen.getByText(/sentry/i)).toBeInTheDocument()
+    })
+  })
+
+  describe('AI Workflow', () => {
+    it('should display GitHub Copilot', () => {
+      render(<TechStack />)
+      expect(screen.getByText(/github copilot/i)).toBeInTheDocument()
+    })
+
+    it('should display Claude AI', () => {
+      render(<TechStack />)
+      expect(screen.getByText(/claude ai/i)).toBeInTheDocument()
+    })
+
+    it('should display AI-Assisted Development', () => {
+      render(<TechStack />)
+      expect(screen.getByText(/ai-assisted development/i)).toBeInTheDocument()
     })
   })
 

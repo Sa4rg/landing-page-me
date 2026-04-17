@@ -27,9 +27,9 @@ describe('Hero', () => {
       expect(screen.getByRole('button', { name: /view projects/i })).toBeInTheDocument()
     })
 
-    it('should render Download CV button', () => {
+    it('should render View CV button', () => {
       render(<Hero />)
-      expect(screen.getByRole('button', { name: /download cv/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /view cv/i })).toBeInTheDocument()
     })
 
     it('should call onViewProjects when View Projects is clicked', async () => {
