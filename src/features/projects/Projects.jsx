@@ -24,13 +24,13 @@ export function Projects() {
       image: '/images/primebuy/Screenshot 2026-04-16 193651.png',
       imageAlt: 'AI Shopping Assistant integrated in homepage',
       title: 'AI Shopping Assistant',
-      description: 'Integrated AI chatbot with real-time product queries and natural language processing for enhanced user experience',
+      description: 'An AI-powered chatbot that allows users to ask questions about products, orders, and after-sales support in real time, and uses natural language processing to provide a better user experience',
     },
     {
       image: '/images/primebuy/Screenshot 2026-04-16 193913.png',
-      imageAlt: 'Multi-payment checkout interface',
+      imageAlt: 'Multi-payment and delivery checkout interface',
       title: 'Multi-Payment Gateway',
-      description: 'Seamless integration with multiple payment methods including Zelle, Zinli, and delivery payment options',
+      description: 'Seamless integration with multiple payment methods including Zelle, Zinli, national transfer back and delivery options, in the same city or nationwide',
     },
     {
       image: '/images/primebuy/Screenshot 2026-04-16 194206.png',

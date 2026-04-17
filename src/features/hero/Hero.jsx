@@ -47,8 +47,13 @@ export function Hero({ onViewProjects, onDownloadCV }) {
           </h2>
 
           {/* Tagline */}
-          <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Building scalable solutions with clean architecture and modern technologies
+          <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 leading-relaxed">
+            Building scalable solutions with clean architecture and modern technologies to solve real-world problems.
+          </p>
+
+          {/* Secondary tagline */}
+          <p className="text-base sm:text-lg text-gray-500 dark:text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed italic">
+            AI enthusiast, lifelong learner, and passionate about creating impactful software, agents and workflows.
           </p>
 
           {/* CTAs */}
@@ -80,7 +85,7 @@ export function Hero({ onViewProjects, onDownloadCV }) {
               </Button>
               {/* Tooltip */}
               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                A espera de recibir el certificado para publicar
+                Waiting to receive the certificate so we can publish
                 <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
               </div>
             </div>
@@ -101,7 +106,7 @@ export function Hero({ onViewProjects, onDownloadCV }) {
             </a>
 
             <a
-              href="https://linkedin.com/in/sara-arguello"
+              href="https://www.linkedin.com/in/sara-arguello-860975403/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -113,7 +118,7 @@ export function Hero({ onViewProjects, onDownloadCV }) {
             </a>
 
             <a
-              href="mailto:sara.arguello@example.com"
+              href="mailto:sa30811670@gmail.com"
               className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               aria-label="Email"
             >
