@@ -10,11 +10,13 @@ import { Card } from '../../shared/components'
 export function TechStack() {
   const techCategories = [
     {
-      title: 'Frontend',
-      color: 'blue',
+      title: 'Frontend & Testing',
+      color: 'indigo',
       technologies: [
         'React',
         'Vite',
+        'Vitest',
+        'JUnit',
         'Tailwind CSS',
         'Testing Library'
       ]
@@ -25,8 +27,18 @@ export function TechStack() {
       technologies: [
         'Node.js',
         'Express',
+        'Maven',
+        'Spring Boot',
+      ]
+    },
+        {
+      title: 'Database',
+      color: 'purple',
+      technologies: [
         'MySQL',
-        'Knex.js'
+        'PostgreSQL',
+        'Knex.js',
+        'JPA / Hibernate'
       ]
     },
     {
@@ -35,8 +47,10 @@ export function TechStack() {
       technologies: [
         'Docker',
         'GitHub Actions',
+        'Jenkins',
         'Render',
-        'Vercel'
+        'Vercel', 
+        'Railway'
       ]
     },
     {
