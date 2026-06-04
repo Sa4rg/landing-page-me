@@ -1,140 +1,108 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { Certifications } from './Certifications'
+import userEvent from '@testing-library/user-event'
 
 describe('Certifications', () => {
   describe('Rendering', () => {
+    it('should render section with correct id', () => {
+      const { container } = render(<Certifications />)
+      const section = container.querySelector('#certifications')
+      expect(section).toBeInTheDocument()
+    })
+
     it('should render section title', () => {
       render(<Certifications />)
-      
       expect(screen.getByRole('heading', { level: 2, name: /certifications/i })).toBeInTheDocument()
     })
 
-    it('should render section description', () => {
+    it('should render certificate image', () => {
       render(<Certifications />)
-      
-      expect(screen.getByText(/professional certifications and continuous learning/i)).toBeInTheDocument()
+      const image = screen.getByAltText(/master de desarrollo con ia/i)
+      expect(image).toBeInTheDocument()
+      expect(image).toHaveAttribute('src', '/images/certificate.jpg')
     })
 
-    it('should have proper section structure', () => {
-      const { container } = render(<Certifications />)
-      
-      const section = container.querySelector('section')
-      expect(section).toBeInTheDocument()
-      expect(section).toHaveAttribute('id', 'certifications')
+    it('should render certificate title', () => {
+      render(<Certifications />)
+      expect(screen.getByText(/master de desarrollo con ia/i)).toBeInTheDocument()
+    })
+
+    it('should render issuer information', () => {
+      render(<Certifications />)
+      expect(screen.getByText(/big school/i)).toBeInTheDocument()
+    })
+
+    it('should render completion date', () => {
+      render(<Certifications />)
+      expect(screen.getByText(/may 2026/i)).toBeInTheDocument()
     })
   })
 
-  describe('Certificate Display', () => {
-    it('should render placeholder when no certificates', () => {
-      render(<Certifications certificates={[]} />)
-      
-      expect(screen.getByText(/coming soon/i)).toBeInTheDocument()
+  describe('Feedback Section', () => {
+    it('should render feedback preview text', () => {
+      render(<Certifications />)
+      expect(screen.getByText(/tu proyecto transmite una sensación muy clara/i)).toBeInTheDocument()
     })
 
-    it('should render certificate cards when provided', () => {
-      const mockCertificates = [
-        {
-          title: 'Full-Stack Development Bootcamp',
-          issuer: 'BigSchool',
-          date: 'April 2026',
-          image: '/cert1.jpg',
-        },
-      ]
-      
-      render(<Certifications certificates={mockCertificates} />)
-      
-      expect(screen.getByText('Full-Stack Development Bootcamp')).toBeInTheDocument()
-      expect(screen.getByText('BigSchool')).toBeInTheDocument()
-      expect(screen.getByText('April 2026')).toBeInTheDocument()
+    it('should render "Read More" button initially', () => {
+      render(<Certifications />)
+      expect(screen.getByRole('button', { name: /read more/i })).toBeInTheDocument()
     })
 
-    it('should render multiple certificates', () => {
-      const mockCertificates = [
-        {
-          title: 'Full-Stack Development Bootcamp',
-          issuer: 'BigSchool',
-          date: 'April 2026',
-          image: '/cert1.jpg',
-        },
-        {
-          title: 'Advanced Web Development',
-          issuer: 'Universidad de España',
-          date: 'May 2026',
-          image: '/cert2.jpg',
-        },
-      ]
-      
-      render(<Certifications certificates={mockCertificates} />)
-      
-      expect(screen.getByText('Full-Stack Development Bootcamp')).toBeInTheDocument()
-      expect(screen.getByText('Advanced Web Development')).toBeInTheDocument()
+    it('should not render full feedback initially', () => {
+      render(<Certifications />)
+      expect(screen.queryByText(/enhorabuena/i)).not.toBeInTheDocument()
     })
 
-    it('should render certificate images', () => {
-      const mockCertificates = [
-        {
-          title: 'Full-Stack Development Bootcamp',
-          issuer: 'BigSchool',
-          date: 'April 2026',
-          image: '/cert1.jpg',
-        },
-      ]
+    it('should expand feedback when clicking "Read More"', async () => {
+      const user = userEvent.setup()
+      render(<Certifications />)
       
-      render(<Certifications certificates={mockCertificates} />)
+      const readMoreButton = screen.getByRole('button', { name: /read more/i })
+      await user.click(readMoreButton)
       
-      const img = screen.getByAltText(/full-stack development bootcamp/i)
-      expect(img).toBeInTheDocument()
-      expect(img).toHaveAttribute('src', '/cert1.jpg')
+      expect(screen.getByRole('button', { name: /read less/i })).toBeInTheDocument()
+      expect(screen.getByText(/enhorabuena/i)).toBeInTheDocument()
+    })
+
+    it('should collapse feedback when clicking "Read Less"', async () => {
+      const user = userEvent.setup()
+      render(<Certifications />)
+      
+      await user.click(screen.getByRole('button', { name: /read more/i }))
+      await user.click(screen.getByRole('button', { name: /read less/i }))
+      
+      expect(screen.getByRole('button', { name: /read more/i })).toBeInTheDocument()
+      expect(screen.queryByText(/enhorabuena/i)).not.toBeInTheDocument()
     })
   })
 
   describe('Accessibility', () => {
-    it('should have proper semantic structure', () => {
-      const { container } = render(<Certifications />)
-      
-      expect(container.querySelector('section')).toBeInTheDocument()
-      expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument()
+    it('should have proper heading hierarchy', () => {
+      render(<Certifications />)
+      const heading = screen.getByRole('heading', { level: 2, name: /certifications/i })
+      expect(heading).toBeInTheDocument()
     })
 
-    it('should have accessible certificate images', () => {
-      const mockCertificates = [
-        {
-          title: 'Full-Stack Development Bootcamp',
-          issuer: 'BigSchool',
-          date: 'April 2026',
-          image: '/cert1.jpg',
-        },
-      ]
-      
-      render(<Certifications certificates={mockCertificates} />)
-      
-      const img = screen.getByRole('img')
-      expect(img).toHaveAttribute('alt')
+    it('should have accessible certificate image', () => {
+      render(<Certifications />)
+      const image = screen.getByAltText(/master de desarrollo con ia/i)
+      expect(image).toHaveAttribute('alt')
+    })
+
+    it('should have accessible expand/collapse button', () => {
+      render(<Certifications />)
+      const button = screen.getByRole('button', { name: /read more/i })
+      expect(button).toBeInTheDocument()
     })
   })
 
-  describe('Layout', () => {
-    it('should use grid layout for multiple certificates', () => {
-      const mockCertificates = [
-        {
-          title: 'Certificate 1',
-          issuer: 'Issuer 1',
-          date: 'Date 1',
-          image: '/cert1.jpg',
-        },
-        {
-          title: 'Certificate 2',
-          issuer: 'Issuer 2',
-          date: 'Date 2',
-          image: '/cert2.jpg',
-        },
-      ]
-      
-      const { container } = render(<Certifications certificates={mockCertificates} />)
-      
-      const grid = container.querySelector('[class*="grid"]')
-      expect(grid).toBeInTheDocument()
+  describe('Responsive Layout', () => {
+    it('should render grid layout container', () => {
+      const { container } = render(<Certifications />)
+      const gridContainer = container.querySelector('.grid')
+      expect(gridContainer).toBeInTheDocument()
     })
   })
 })

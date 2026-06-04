@@ -94,9 +94,6 @@ landing-page-me/
 ## 🧪 Testing Strategy
 
 Following **Test-Driven Development (TDD)**:
-1. Write test first
-2. Implement feature
-3. Refactor
 
 ### What we test:
 ✅ Critical components (Button, Card, Section)  

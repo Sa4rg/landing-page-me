@@ -5,8 +5,8 @@ import { Certifications } from './features/certifications/Certifications'
 import { Contact } from './features/contact/Contact'
 
 function App() {
-  // Flag to show/hide certifications section (activate when certificate arrives)
-  const showCertifications = false
+  // Certifications section now active with Master de Desarrollo con IA certificate
+  const showCertifications = true
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">

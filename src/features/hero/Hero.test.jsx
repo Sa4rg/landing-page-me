@@ -32,6 +32,11 @@ describe('Hero', () => {
       expect(screen.getByRole('button', { name: /view cv/i })).toBeInTheDocument()
     })
 
+    it('should render Certifications button', () => {
+      render(<Hero />)
+      expect(screen.getByRole('button', { name: /certifications/i })).toBeInTheDocument()
+    })
+
     it('should call onViewProjects when View Projects is clicked', async () => {
       const user = userEvent.setup()
       const handleViewProjects = vi.fn()
