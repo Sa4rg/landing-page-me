@@ -38,7 +38,8 @@ export function TechStack() {
         'MySQL',
         'PostgreSQL',
         'Knex.js',
-        'JPA / Hibernate'
+        'JPA / Hibernate',
+        'Supabase'
       ]
     },
     {
