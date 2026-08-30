@@ -101,7 +101,7 @@ describe('TechStack', () => {
   describe('Tools', () => {
     it('should display Vitest', () => {
       render(<TechStack />)
-      expect(screen.getByText(/vitest/i)).toBeInTheDocument()
+      expect(screen.getAllByText(/^vitest$/i).length).toBeGreaterThan(0)
     })
 
     it('should display Sentry', () => {
