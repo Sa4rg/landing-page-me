@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { act } from 'react'
 import { Carousel } from './Carousel'
 
 describe('Carousel', () => {
@@ -36,8 +37,8 @@ describe('Carousel', () => {
       render(<Carousel images={mockImages} />)
       
       const dots = screen.getAllByRole('button', { name: /go to slide/i })
-      expect(dots[0]).toHaveClass('bg-blue-600') // Dot activo
-      expect(dots[1]).toHaveClass('bg-gray-300') // Dot inactivo
+      expect(dots[0]).toHaveClass('bg-blue-600')
+      expect(dots[1]).toHaveClass('bg-gray-300')
     })
 
     it('should render with custom className', () => {
@@ -65,11 +66,9 @@ describe('Carousel', () => {
       const user = userEvent.setup()
       render(<Carousel images={mockImages} />)
       
-      // Ir a la segunda imagen primero
       const nextButton = screen.getByRole('button', { name: /next/i })
       await user.click(nextButton)
       
-      // Volver a la primera
       const prevButton = screen.getByRole('button', { name: /previous/i })
       await user.click(prevButton)
       
@@ -82,10 +81,9 @@ describe('Carousel', () => {
       
       const nextButton = screen.getByRole('button', { name: /next/i })
       
-      // Click 3 veces para llegar al final y volver al inicio
-      await user.click(nextButton) // Image 2
-      await user.click(nextButton) // Image 3
-      await user.click(nextButton) // Image 1 (loop)
+      await user.click(nextButton)
+      await user.click(nextButton)
+      await user.click(nextButton)
       
       expect(screen.getByAltText('Image 1')).toBeInTheDocument()
     })
@@ -105,7 +103,7 @@ describe('Carousel', () => {
       render(<Carousel images={mockImages} />)
       
       const dots = screen.getAllByRole('button', { name: /go to slide/i })
-      await user.click(dots[2]) // Ir al slide 3
+      await user.click(dots[2])
       
       expect(screen.getByAltText('Image 3')).toBeInTheDocument()
     })
@@ -134,10 +132,10 @@ describe('Carousel', () => {
       
       expect(screen.getByAltText('Image 1')).toBeInTheDocument()
       
-      // Avanzar 6 segundos
-      vi.advanceTimersByTime(6000)
+      act(() => {
+        vi.advanceTimersByTime(6000)
+      })
       
-      // Debería seguir en la primera imagen
       expect(screen.getByAltText('Image 1')).toBeInTheDocument()
       
       vi.useRealTimers()
@@ -149,10 +147,10 @@ describe('Carousel', () => {
       
       expect(screen.getByAltText('Image 1')).toBeInTheDocument()
       
-      // Avanzar el timer
-      vi.advanceTimersByTime(1000)
+      act(() => {
+        vi.advanceTimersByTime(1000)
+      })
       
-      // Debería cambiar a la segunda imagen
       expect(screen.getByAltText('Image 2')).toBeInTheDocument()
       
       vi.useRealTimers()
@@ -161,7 +159,6 @@ describe('Carousel', () => {
     it('should render correctly with autoPlay enabled', () => {
       render(<Carousel images={mockImages} autoPlay interval={3000} />)
       
-      // Verificar que renderiza correctamente con autoPlay
       expect(screen.getByRole('region', { name: /carousel/i })).toBeInTheDocument()
       expect(screen.getByAltText('Image 1')).toBeInTheDocument()
     })

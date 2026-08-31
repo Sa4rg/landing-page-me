@@ -14,6 +14,18 @@ export function Lightbox({
   const currentImage = isSingleImage ? image : (images?.[currentIndex] || null)
   const hasMultipleImages = images && images.length > 1
 
+  const handleNext = useCallback(() => {
+    if (!images || !onNavigate) return
+    const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
+    onNavigate(nextIndex)
+  }, [images, currentIndex, onNavigate])
+
+  const handlePrevious = useCallback(() => {
+    if (!images || !onNavigate) return
+    const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
+    onNavigate(prevIndex)
+  }, [images, currentIndex, onNavigate])
+
   // Handle ESC key to close
   useEffect(() => {
     if (!isOpen) return
@@ -32,7 +44,15 @@ export function Lightbox({
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, hasMultipleImages, onNavigate, currentIndex])
+  }, [
+    isOpen,
+    hasMultipleImages,
+    onNavigate,
+    currentIndex,
+    handleNext,
+    handlePrevious,
+    onClose,
+  ])
 
   // Lock/unlock body scroll
   useEffect(() => {
@@ -46,18 +66,6 @@ export function Lightbox({
       document.body.style.overflow = 'auto'
     }
   }, [isOpen])
-
-  const handleNext = useCallback(() => {
-    if (!images || !onNavigate) return
-    const nextIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1
-    onNavigate(nextIndex)
-  }, [images, currentIndex, onNavigate])
-
-  const handlePrevious = useCallback(() => {
-    if (!images || !onNavigate) return
-    const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1
-    onNavigate(prevIndex)
-  }, [images, currentIndex, onNavigate])
 
   const handleOverlayClick = (e) => {
     // Only close if clicking on the overlay itself, not on children
