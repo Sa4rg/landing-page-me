@@ -2,7 +2,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Lightbox } from '../Lightbox/Lightbox'
 
-export function FeatureHighlight({ image, imageAlt, title, description, className = '' }) {
+export function FeatureHighlight({ image, imageAlt, title, description, fit = 'cover', className = '' }) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
 
   return (
@@ -17,7 +17,11 @@ export function FeatureHighlight({ image, imageAlt, title, description, classNam
         <img
           src={image}
           alt={imageAlt}
-          className="h-full w-full object-cover transition-transform hover:scale-110"
+          className={`h-full w-full ${
+            fit === 'contain'
+              ? 'object-contain p-2 bg-gray-100 dark:bg-gray-700'
+              : 'object-cover transition-transform hover:scale-110'
+          }`}
           loading="lazy"
         />
       </div>
@@ -47,5 +51,6 @@ FeatureHighlight.propTypes = {
   imageAlt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  fit: PropTypes.oneOf(['cover', 'contain']),
   className: PropTypes.string,
 }

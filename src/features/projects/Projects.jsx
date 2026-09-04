@@ -17,6 +17,7 @@ export function Projects() {
       statusColor: 'green',
       dateRange: 'December 2025 - April 2026',
       dateSubtext: 'In active development',
+      fit: 'cover', 
       carouselImages: [
         { src: '/images/primebuy/Screenshot 2026-04-16 193548.png', alt: 'PrimeBuy Home - Landing page with featured products' },
         { src: '/images/primebuy/Screenshot 2026-04-16 193750.png', alt: 'Google OAuth Login - Secure authentication' },
@@ -79,6 +80,7 @@ export function Projects() {
       statusColor: 'green',
       dateRange: 'April 28, 2026 - May 30, 2026',
       dateSubtext: 'In production (Android)',
+      fit: 'contain',
       carouselImages: [
         { src: '/images/shiftcontrol/staff-home.jpg', alt: 'Staff Home - Active shift with sales tracking' },
         { src: '/images/shiftcontrol/my-shifts.jpg', alt: 'My Shifts - Shift history and status' },
@@ -160,6 +162,7 @@ export function Projects() {
                     <div className="p-6 lg:p-8 bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
                       <Carousel 
                         images={project.carouselImages}
+                        fit={project.fit}
                         autoPlay={true}
                         interval={4000}
                         className="w-full"
@@ -272,6 +275,7 @@ export function Projects() {
                         imageAlt={feature.imageAlt}
                         title={feature.title}
                         description={feature.description}
+                        fit={project.fit}
                       />
                     ))}
                   </div>

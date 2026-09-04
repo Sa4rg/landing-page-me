@@ -81,11 +81,18 @@ describe('FeatureHighlight', () => {
       expect(card).toBeInTheDocument()
     })
 
-    it('should display image with object-cover', () => {
+    it('should use object-cover by default', () => {
       render(<FeatureHighlight {...mockFeature} />)
-      
+
       const img = screen.getByRole('img')
       expect(img).toHaveClass('object-cover')
+    })
+
+    it('should use object-contain when fit is contain', () => {
+      render(<FeatureHighlight {...mockFeature} fit="contain" />)
+
+      const img = screen.getByRole('img')
+      expect(img).toHaveClass('object-contain')
     })
 
     it('should support dark mode styling', () => {
