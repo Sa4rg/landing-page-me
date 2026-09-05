@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Lightbox } from '../Lightbox/Lightbox'
 
-export function Carousel({ images = [], autoPlay = false, interval = 5000, className = '' }) {
+export function Carousel({ images = [], fit = 'cover', autoPlay = false, interval = 5000, className = '' }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
@@ -56,22 +56,30 @@ export function Carousel({ images = [], autoPlay = false, interval = 5000, class
     >
       {/* Images Container */}
       <div className="relative aspect-[16/10]">
-        {images.map((image, index) => (
+        {images.map((image, index) => {
+          const currentFit = image.fit || fit
+          
+          return (
           <div
             key={index}
             className={`absolute inset-0 transition-opacity duration-500 ${
               index === currentIndex ? 'opacity-100' : 'opacity-0'
             }`}
-          >
+          > 
             <img
               src={image.src}
               alt={image.alt}
-              className="h-full w-full cursor-pointer object-cover transition-transform hover:scale-105"
+              className={`h-full w-full cursor-pointer transition-transform ${
+                currentFit === 'contain'
+                ? 'object-contain p-2 bg-gray-100 dark:bg-gray-800'
+                : 'object-cover hover:scale-105'
+              }`}
               loading={index === 0 ? 'eager' : 'lazy'}
               onClick={() => setIsLightboxOpen(true)}
             />
           </div>
-        ))}
+        )
+        })}
       </div>
 
       {/* Navigation Buttons */}
@@ -149,8 +157,10 @@ Carousel.propTypes = {
     PropTypes.shape({
       src: PropTypes.string.isRequired,
       alt: PropTypes.string.isRequired,
+      fit: PropTypes.oneOf(['cover', 'contain']),
     })
   ),
+  fit: PropTypes.oneOf(['cover', 'contain']),
   autoPlay: PropTypes.bool,
   interval: PropTypes.number,
   className: PropTypes.string,

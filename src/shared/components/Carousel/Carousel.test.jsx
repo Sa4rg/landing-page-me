@@ -49,6 +49,25 @@ describe('Carousel', () => {
       const carousel = container.querySelector('.custom-carousel')
       expect(carousel).toBeInTheDocument()
     })
+
+    it('should use global contain fit when fit prop is contain', () => {
+      render(<Carousel images={mockImages} fit="contain" />)
+
+      const img = screen.getByAltText('Image 1')
+      expect(img).toHaveClass('object-contain')
+    })
+
+    it('should prioritize image fit over global fit', () => {
+      const imagesWithOverride = [
+        { src: '/image1.jpg', alt: 'Image 1', fit: 'cover' },
+        { src: '/image2.jpg', alt: 'Image 2', fit: 'contain' },
+      ]
+
+      render(<Carousel images={imagesWithOverride} fit="contain" />)
+
+      const img = screen.getByAltText('Image 1')
+      expect(img).toHaveClass('object-cover')
+    })
   })
 
   describe('Navigation', () => {
