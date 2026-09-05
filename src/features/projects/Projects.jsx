@@ -76,7 +76,7 @@ export function Projects() {
       id: 'shift-control',
       title: 'Shift Control',
       description: 'Internal mobile application for shift sales control with staff management, cash reconciliation, and incident tracking',
-      status: 'Active Project',
+      status: 'Active and sold project by subscription license',
       statusColor: 'green',
       dateRange: 'April 28, 2026 - May 30, 2026',
       dateSubtext: 'In production (Android)',
