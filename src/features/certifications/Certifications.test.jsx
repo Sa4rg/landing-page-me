@@ -30,7 +30,7 @@ describe('Certifications', () => {
 
     it('should render issuer information', () => {
       render(<Certifications />)
-      expect(screen.getByText(/big school/i)).toBeInTheDocument()
+      expect(screen.getAllByText(/big school/i).length).toBeGreaterThan(0)
     })
 
     it('should render completion date', () => {
